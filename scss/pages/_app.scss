@@ -1,0 +1,17 @@
+/* _app.scss */
+
+body {
+	align-items: center;
+	background: $color-black;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	justify-content: center;
+}
+
+section {
+	max-width: 100%;
+	text-align: center;
+	width: 600px;
+}

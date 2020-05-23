@@ -1,0 +1,25 @@
+/* _start.scss */
+
+#start {
+	nav {
+		display: flex;
+		flex-direction: column;
+		text-align: left;
+
+		label {
+			margin-bottom: 1rem;
+		}
+	}
+
+	@media (min-width: 500px) {
+		nav {
+			flex-direction: row;
+			flex-wrap: wrap;
+
+			label {
+				display: block;
+				width: 50%;
+			}
+		}
+	}
+}

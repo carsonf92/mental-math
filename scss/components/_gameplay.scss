@@ -1,0 +1,15 @@
+/* _gameplay.scss */
+
+#gameplay {
+	nav {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		text-align: left;
+
+		label {
+			margin-bottom: 1rem;
+			width: 200px;
+		}
+	}
+}

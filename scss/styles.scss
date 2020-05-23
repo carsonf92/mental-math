@@ -1,0 +1,17 @@
+/* _styles.scss */
+
+// EXTERNAL //
+@import 'external/normalize';
+@import 'external/nes-core';
+
+// BASE //
+@import 'base/colors';
+@import 'base/typography';
+
+// COMPONENTS //
+@import 'components/title';
+@import 'components/start';
+@import "components/gameplay";
+
+// PAGES //
+@import 'pages/app';
