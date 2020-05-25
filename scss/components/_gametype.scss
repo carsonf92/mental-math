@@ -1,16 +1,15 @@
-/* _start.scss */
+/* _gametype.scss */
 
-#start {
+#gametype {
 	nav {
 		align-items: flex-start;
 		display: flex;
 		flex-direction: column;
 		margin-left: -16px;
-		text-align: left;
 
 		label {
 			margin-bottom: 1rem;
-			width: 280px;
+			width: 200px;
 		}
 	}
 }

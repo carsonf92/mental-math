@@ -1,1 +1,20 @@
 /* _title.scss */
+
+#title {
+	text-align: center;
+
+	nav {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+
+		label {
+			margin-bottom: 1rem;
+		}
+	}
+
+	#keys {
+		font-size: 0.75rem;
+		margin-top: 1rem;
+	}
+}

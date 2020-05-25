@@ -2095,8 +2095,30 @@ input[type=checkbox], input[type=radio] {
 /* _colors.scss */
 /* _typography.scss */
 /* _title.scss */
+#title {
+  text-align: center; }
+  #title nav {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    #title nav label {
+      margin-bottom: 1rem; }
+  #title #keys {
+    font-size: 0.75rem;
+    margin-top: 1rem; }
+
 /* _start.scss */
 #start nav {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2104,45 +2126,93 @@ input[type=checkbox], input[type=radio] {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  margin-left: -16px;
   text-align: left; }
   #start nav label {
-    margin-bottom: 1rem; }
+    margin-bottom: 1rem;
+    width: 280px; }
 
-@media (min-width: 500px) {
-  #start nav {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap; }
-    #start nav label {
-      display: block;
-      width: 50%; } }
+/* _gametype.scss */
+#gametype nav {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: -16px; }
+  #gametype nav label {
+    margin-bottom: 1rem;
+    width: 200px; }
 
 /* _gameplay.scss */
-#gameplay nav {
+#gameplay progress {
+  display: none;
+  height: 24px;
+  width: calc(100% - 16px); }
+  #gameplay progress.active {
+    display: block; }
+
+#gameplay #equation {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  text-align: left; }
-  #gameplay nav label {
-    margin-bottom: 1rem;
-    width: 200px; }
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+#gameplay .digit {
+  font-size: 1.5rem; }
+
+#gameplay .symbol {
+  font-size: 1.5rem;
+  margin: 0 0.5rem; }
+
+#gameplay #answers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 8px;
+  padding: 0 4px; }
+  #gameplay #answers span {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1; }
+
+/* _prompt.scss */
+#prompt {
+  display: none;
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 10; }
+  #prompt.active {
+    display: block; }
+  #prompt nav {
+    margin-left: -16px; }
 
 /* _app.scss */
+*,
+body,
+input {
+  cursor: none !important;
+  pointer-events: none !important; }
+
 body {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background: #212529;
+  background: #15141f;
   color: white;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2154,9 +2224,45 @@ body {
   height: 100vh;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center; }
+  justify-content: center;
+  overflow: hidden;
+  position: relative; }
+  body.title::before {
+    -webkit-animation: slide-by 4s linear infinite;
+    animation: slide-by 4s linear infinite;
+    background: #15141f url("../images/arithmetic-grid.png") center;
+    content: '';
+    height: 200vh;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: rotate(15deg) translate(calc(-50% + 44px), calc(-50% + 44px));
+    -ms-transform: rotate(15deg) translate(calc(-50% + 44px), calc(-50% + 44px));
+    transform: rotate(15deg) translate(calc(-50% + 44px), calc(-50% + 44px));
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    width: 200vw; }
+
+@-webkit-keyframes slide-by {
+  to {
+    -webkit-transform: rotate(15deg) translate(calc(-50% - 44px), calc(-50% - 44px));
+    transform: rotate(15deg) translate(calc(-50% - 44px), calc(-50% - 44px)); } }
+
+@keyframes slide-by {
+  to {
+    -webkit-transform: rotate(15deg) translate(calc(-50% - 44px), calc(-50% - 44px));
+    transform: rotate(15deg) translate(calc(-50% - 44px), calc(-50% - 44px)); } }
 
 section {
+  display: none;
   max-width: 100%;
-  text-align: center;
-  width: 600px; }
+  position: relative;
+  width: 500px;
+  z-index: 1; }
+  section.active {
+    display: block; }
+
+.nes-container.is-dark {
+  background-color: #15141f;
+  padding: 2rem 3rem; }

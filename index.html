@@ -25,33 +25,40 @@
 	<meta name="theme-color" content="#ffffff">
 </head>
 
-<body>
+<body class="title">
 
-	<section id="title">
+	<section id="title" class="active">
 		<h1>Mental Math</h1>
-		<label>
-			<input type="radio" class="nes-radio is-dark" id="start" checked />
-			<span>Start</span>
-		</label>
+		<nav>
+			<label for="press-start">
+				<input type="radio" class="nes-radio is-dark" id="press-start" name="nav" checked />
+				<span>Start</span>
+			</label>
+			<label for="highscores">
+				<input type="radio" class="nes-radio is-dark" id="highscores" name="nav" />
+				<span>Highscores</span>
+			</label>
+		</nav>
+		<div id="keys">X - Select &emsp; Z - Go back</div>
 	</section>
 
 	<section id="start">
 		<div class="nes-container is-rounded is-dark">
-			<p>Select an arithmetic discipline to get started.</p>
+			<p>Select a discipline to get started.</p>
 			<nav>
-				<label>
+				<label for="addition">
 					<input type="radio" class="nes-radio is-dark" id="addition" name="skill" checked />
 					<span>Addition</span>
 				</label>
-				<label>
+				<label for="subtraction">
 					<input type="radio" class="nes-radio is-dark" id="subtraction" name="skill" />
 					<span>Subtraction</span>
 				</label>
-				<label>
+				<label for="multiplication">
 					<input type="radio" class="nes-radio is-dark" id="multiplication" name="skill" />
 					<span>Multiplication</span>
 				</label>
-				<label>
+				<label for="division">
 					<input type="radio" class="nes-radio is-dark" id="division" name="skill" />
 					<span>Division</span>
 				</label>
@@ -59,37 +66,55 @@
 		</div>
 	</section>
 
-	<section id="gameplay">
+	<section id="gametype">
 		<div class="nes-container is-rounded is-dark">
-			<p>Practice your mental math skills or complete a timed challenge for a highscore.</p>
+			<p>Practice or complete a timed challenge for a highscore.</p>
 			<nav>
-				<label>
+				<label for="practice">
 					<input type="radio" class="nes-radio is-dark" id="practice" name="gameplay" checked />
 					<span>Practice</span>
 				</label>
-				<label>
-					<input type="radio" class="nes-radio is-dark" id="Challenge" name="gameplay" />
+				<label for="challenge">
+					<input type="radio" class="nes-radio is-dark" id="challenge" name="gameplay" />
 					<span>Challenge</span>
 				</label>
 			</nav>
 		</div>
 	</section>
 
-	<section id="game">
+	<section id="gameplay">
 		<div id="info">
-			<progress class="nes-progress is-success" value="10" max="100"></progress>
+			<progress class="nes-progress is-success" value="0" max="100"></progress>
 		</div>
 		<div class="nes-container is-rounded is-dark">
 			<div id="equation">
-				
+				<div id="one" class="digit"></div>
+				<div id="operator" class="symbol"></div>
+				<div id="two" class="digit"></div>
 			</div>
 		</div>
 		<div id="answers">
-			<a class="nes-btn" href="#">Normal</a>
-			<a class="nes-btn" href="#">Normal</a>
-			<a class="nes-btn" href="#">Normal</a>
+			<span class="nes-btn"></span>
+			<span class="nes-btn"></span>
+			<span class="nes-btn"></span>
 		</div>
 	</section>
+
+	<aside id="prompt">
+		<div class="nes-container is-rounded is-dark">
+			<p>Are you sure you want to end this session?</p>
+			<nav>
+				<label for="resign">
+					<input type="radio" class="nes-radio is-dark" id="resign" name="prompt" checked />
+					<span>Yes</span>
+				</label>
+				<label for="dismiss">
+					<input type="radio" class="nes-radio is-dark" id="dismiss" name="prompt" />
+					<span>No</span>
+				</label>
+			</nav>
+		</div>
+	</aside>
 
 	<!-- Main Script -->
 	<script src="js/scripts.js"></script>

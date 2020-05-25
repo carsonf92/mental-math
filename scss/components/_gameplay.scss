@@ -1,15 +1,38 @@
 /* _gameplay.scss */
 
 #gameplay {
-	nav {
+	progress {
+		display: none;
+		height: 24px;
+    	width: calc(100% - 16px);
+
+    	&.active {
+    		display: block;
+    	}
+	}
+
+	#equation {
 		align-items: center;
 		display: flex;
-		flex-direction: column;
-		text-align: left;
+		justify-content: center;
+	}
+	
+	.digit {
+		font-size: 1.5rem;
+	}
 
-		label {
-			margin-bottom: 1rem;
-			width: 200px;
+	.symbol {
+		font-size: 1.5rem;
+		margin: 0 0.5rem;
+	}
+
+	#answers {
+		display: flex;
+		margin-top: 8px;
+		padding: 0 4px;
+
+		span {
+			flex-grow: 1;
 		}
 	}
 }

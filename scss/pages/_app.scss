@@ -1,17 +1,56 @@
 /* _app.scss */
 
+*,
+body,
+input {
+	cursor: none !important;
+	pointer-events: none !important;
+}
+
 body {
 	align-items: center;
-	background: $color-black;
+	background: $color-purple-deep;
 	color: white;
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
 	justify-content: center;
+	overflow: hidden;
+	position: relative;
+
+	&.title {
+		&::before {
+			animation: slide-by 4s linear infinite;
+			background: $color-purple-deep url('../images/arithmetic-grid.png') center;
+			content: '';
+			height: 200vh;
+			left: 50%;
+			position: absolute;
+			top: 50%;
+			transform: rotate(15deg) translate(calc(-50% + 44px), calc(-50% + 44px));
+			transform-origin: center;
+			width: 200vw;
+		}
+	}
+}
+
+@keyframes slide-by {
+	to { transform: rotate(15deg) translate(calc(-50% - 44px), calc(-50% - 44px)); }
 }
 
 section {
+	display: none;
 	max-width: 100%;
-	text-align: center;
-	width: 600px;
+	position: relative;
+	width: 500px;
+	z-index: 1;
+
+	&.active {
+		display: block;
+	}
+}
+
+.nes-container.is-dark {
+	background-color: $color-purple-deep;
+	padding: 2rem 3rem;
 }
