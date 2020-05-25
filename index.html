@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Mental Math</title>
+	<title>Arithmaster</title>
 	<meta name="description" content="Randomly generated arithmetic practice problems">
 	<meta name="author" content="Carson Ford">
 
@@ -28,18 +28,28 @@
 <body class="title">
 
 	<section id="title" class="active">
-		<h1>Mental Math</h1>
+		<h1>Arithmaster</h1>
 		<nav>
 			<label for="press-start">
 				<input type="radio" class="nes-radio is-dark" id="press-start" name="nav" checked />
 				<span>Start</span>
 			</label>
-			<label for="highscores">
-				<input type="radio" class="nes-radio is-dark" id="highscores" name="nav" />
+			<label for="view-highscores">
+				<input type="radio" class="nes-radio is-dark" id="view-highscores" name="nav" />
 				<span>Highscores</span>
 			</label>
 		</nav>
 		<div id="keys">X - Select &emsp; Z - Go back</div>
+	</section>
+
+	<section id="highscores">
+		<div class="nes-container is-rounded is-dark">
+			<h1>Highscores</h1>
+			<p>Addition<span id="highscore-addition">-</span></p>
+			<p>Subtraction<span id="highscore-subtraction">-</span></p>
+			<p>Multiplication<span id="highscore-multiplication">-</span></p>
+			<p>Division<span id="highscore-division">-</span></p>
+		</div>
 	</section>
 
 	<section id="start">
@@ -88,15 +98,24 @@
 		</div>
 		<div class="nes-container is-rounded is-dark">
 			<div id="equation">
-				<div id="one" class="digit"></div>
+				<div id="digit-one" class="digit"></div>
 				<div id="operator" class="symbol"></div>
-				<div id="two" class="digit"></div>
+				<div id="digit-two" class="digit"></div>
 			</div>
 		</div>
 		<div id="answers">
-			<span class="nes-btn"></span>
-			<span class="nes-btn"></span>
-			<span class="nes-btn"></span>
+			<label class="nes-btn" for="answer-one">
+				<input type="radio" class="nes-radio is-dark" id="answer-one" name="answer" checked />
+				<span></span>
+			</label>
+			<label class="nes-btn" for="answer-two">
+				<input type="radio" class="nes-radio is-dark" id="answer-two" name="answer" />
+				<span></span>
+			</label>
+			<label class="nes-btn" for="answer-three">
+				<input type="radio" class="nes-radio is-dark" id="answer-three" name="answer" />
+				<span></span>
+			</label>
 		</div>
 	</section>
 

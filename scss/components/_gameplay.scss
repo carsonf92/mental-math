@@ -31,8 +31,23 @@
 		margin-top: 8px;
 		padding: 0 4px;
 
-		span {
+		label {
 			flex-grow: 1;
+			position: relative;
+
+			input {
+				position: absolute;
+			}
+		}
+
+		span {
+			color: $color-black;
+
+			&::before {
+				left: 20%;
+				top: 50px;
+				transform: rotate(-90deg) translateX(-50%);
+			}
 		}
 	}
 }

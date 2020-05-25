@@ -10,10 +10,11 @@
 
 // COMPONENTS //
 @import 'components/title';
+@import 'components/highscores';
 @import 'components/start';
-@import "components/gametype";
-@import "components/gameplay";
-@import "components/prompt";
+@import 'components/gametype';
+@import 'components/gameplay';
+@import 'components/prompt';
 
 // PAGES //
 @import 'pages/app';
