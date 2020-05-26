@@ -13,7 +13,7 @@ function ready(callbackFunc) {
 ready(function() {
 
 // ========================
-// Game State
+// Game Data
 // ========================
 
 var gameState = {
@@ -135,6 +135,23 @@ document.addEventListener('keyup', function(e) {
 // Gameplay
 // ========================
 
+// Session Listeners //
+
+// answer buttons
+document.querySelectorAll('#answers input').forEach(function(el) {
+    el.addEventListener('keyup', function(e) {
+		if (e.keyCode === 13 || e.keyCode === 88) { // enter or x
+			if (document.querySelector('#answers input:checked + span').innerText == gameState.equationArray[2]) {
+				correctAnswer();
+			} else {
+				wrongAnswer();
+			}
+		}
+	});
+});
+
+// Session Functions //
+
 function startSession() {
 	if (gameState.mode === 'challenge') {
 		// start countdown
@@ -144,15 +161,19 @@ function startSession() {
 }
 
 function correctAnswer() {
-	// highlight answer as correct
+	document.querySelector('#answers input:checked').parentNode.classList.add('is-success');
 
-	// wait a moment and then generate next question
+	setTimeout(function() {
+		generateEquation(gameState.discipline);
+	}, 500);
 }
 
 function wrongAnswer() {
-	// highlight answer as wrong
+	document.querySelector('#answers input:checked').parentNode.classList.add('is-error');
 
-	// wait a moment and then generate next question
+	setTimeout(function() {
+		generateEquation(gameState.discipline);
+	}, 500);
 }
 
 function endSession() {
@@ -221,6 +242,12 @@ function divisionEquation() {
 
 // create random answers and place as options
 function generateAnswers() {
+	// reset buttons
+	document.querySelectorAll('#answers label').forEach(function(item) {
+		item.classList.remove('is-success');
+		item.classList.remove('is-error');
+	});
+
 	// correct answer
 	gameState.equationAnswers[0] = gameState.equationArray[2];
 	
