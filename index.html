@@ -94,7 +94,7 @@
 
 	<section id="gameplay">
 		<div id="info">
-			<progress class="nes-progress is-success" value="0" max="100"></progress>
+			<progress class="nes-progress is-success" value="0" max="60"></progress>
 		</div>
 		<div class="nes-container is-rounded is-dark">
 			<div id="equation">
@@ -129,6 +129,24 @@
 				</label>
 				<label for="dismiss">
 					<input type="radio" class="nes-radio is-dark" id="dismiss" name="prompt" />
+					<span>No</span>
+				</label>
+			</nav>
+		</div>
+	</aside>
+
+	<aside id="summary">
+		<div class="nes-container is-rounded is-dark">
+			<p>Questions:<span></span></p>
+			<p>Score:<span></span></p>
+			<p>Want to play again?</p>
+			<nav>
+				<label for="replay">
+					<input type="radio" class="nes-radio is-dark" id="replay" name="challenge" checked />
+					<span>Yes</span>
+				</label>
+				<label for="end">
+					<input type="radio" class="nes-radio is-dark" id="end" name="challenge" />
 					<span>No</span>
 				</label>
 			</nav>

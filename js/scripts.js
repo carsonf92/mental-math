@@ -73,11 +73,22 @@ navListener('challenge', function() {
 });
 
 navListener('resign', function() {
-	goToScreen('title');
 	document.getElementById('prompt').classList.remove('active');
+	endSession();
+	goToScreen('title');
 });
 navListener('dismiss', function() {
 	document.getElementById('prompt').classList.remove('active');
+});
+
+navListener('replay', function() {
+	document.getElementById('summary').classList.remove('active');
+	startSession();
+});
+navListener('end', function() {
+	document.getElementById('summary').classList.remove('active');
+	endSession();
+	goToScreen('title');
 });
 
 
@@ -152,9 +163,32 @@ document.querySelectorAll('#answers input').forEach(function(el) {
 
 // Session Functions //
 
+var sessionCountdown;
+
+function countdown() {
+	if (gameState.timer === 10) {
+		document.querySelector('#info progress').classList.remove('is-success');
+		document.querySelector('#info progress').classList.add('is-warning');
+	}
+
+	if (gameState.timer === 5) {
+		document.querySelector('#info progress').classList.remove('is-warning');
+		document.querySelector('#info progress').classList.add('is-error');
+	}
+
+	if (gameState.timer > 0) {
+		gameState.timer--;
+		document.querySelector('#info progress').setAttribute('value', (60 - gameState.timer));
+	} else {
+		endSession();
+	}
+}
+
 function startSession() {
 	if (gameState.mode === 'challenge') {
 		// start countdown
+		document.querySelector('#info progress').classList.add('active');
+		sessionCountdown = setInterval(countdown, 1000);
 	}
 
 	generateEquation(gameState.discipline);
@@ -170,22 +204,31 @@ function correctAnswer() {
 
 function wrongAnswer() {
 	document.querySelector('#answers input:checked').parentNode.classList.add('is-error');
+	document.querySelector('#gameplay .nes-container').classList.add('wrong');
 
 	setTimeout(function() {
+		document.querySelector('#gameplay .nes-container').classList.remove('wrong');
 		generateEquation(gameState.discipline);
 	}, 500);
 }
 
 function endSession() {
 	// if challenge reset countdown
+	if (gameState.mode === 'challenge') {
+		clearInterval(sessionCountdown);
+		gameState.timer = 60;
+		for (i = 0; i < 3; i++) {
+			document.querySelectorAll('#answers label')[i].classList.add('is-disabled');
+		}
 
-	// reset equation count
+		// display summary
+		// ...
+	}
 
-	// reset correct count
-
-	// clear equation
-
-	// clear answers
+	gameState.equationCount = 0;
+	gameState.correctCount = 0;
+	gameState.equationArray = [0, 0, 0];	
+	gameState.equationAnswers = [0, 0, 0];	
 }
 
 // ========================
@@ -211,6 +254,7 @@ function generateEquation(discipline) {
 	generateAnswers();
 }
 
+// +
 function additionEquation() {
 	gameState.equationArray[0] = randomIntFromInterval(1, 100);
 	gameState.equationArray[1] = randomIntFromInterval(1, (100 - gameState.equationArray[0]));
@@ -228,14 +272,17 @@ function additionEquation() {
 	document.getElementById('digit-two').innerHTML = gameState.equationArray[1];
 }
 
+// -
 function subtractionEquation() {
 
 }
 
+// x
 function multiplicationEquation() {
 
 }
 
+// /
 function divisionEquation() {
 
 }

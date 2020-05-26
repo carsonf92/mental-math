@@ -23,19 +23,19 @@ body {
 			animation: slide-by 4s linear infinite;
 			background: $color-purple-deep url('../images/arithmetic-grid.png') center;
 			content: '';
-			height: 200vh;
+			height: 200%;
 			left: 50%;
 			position: absolute;
 			top: 50%;
-			transform: rotate(15deg) translate(calc(-50% + 44px), calc(-50% + 44px));
+			transform: rotate(15deg) translate(calc(-50% + 44px), calc(-25% + 44px));
 			transform-origin: center;
-			width: 200vw;
+			width: 200%;
 		}
 	}
 }
 
 @keyframes slide-by {
-	to { transform: rotate(15deg) translate(calc(-50% - 44px), calc(-50% - 44px)); }
+	to { transform: rotate(15deg) translate(calc(-50% - 44px), calc(-25% - 44px)); }
 }
 
 section {

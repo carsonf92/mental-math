@@ -4,11 +4,23 @@
 	progress {
 		display: none;
 		height: 24px;
+		margin: 0 8px 12px;
     	width: calc(100% - 16px);
 
     	&.active {
     		display: block;
     	}
+	}
+
+	.nes-container.wrong {
+		animation: shake 0.1s ease 0s 2 forwards;
+	}
+
+	@keyframes shake {
+		0% { transform: translateX(0); }
+		25% { transform: translateX(-4px); }
+		75% { transform: translateX(4px); }
+		100% { transform: translateX(0); }
 	}
 
 	#equation {
@@ -34,6 +46,7 @@
 		label {
 			flex-grow: 1;
 			position: relative;
+			width: 33.33%;
 
 			input {
 				position: absolute;

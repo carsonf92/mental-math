@@ -2161,9 +2161,42 @@ input[type=checkbox], input[type=radio] {
 #gameplay progress {
   display: none;
   height: 24px;
+  margin: 0 8px 12px;
   width: calc(100% - 16px); }
   #gameplay progress.active {
     display: block; }
+
+#gameplay .nes-container.wrong {
+  -webkit-animation: shake 0.1s ease 0s 2 forwards;
+  animation: shake 0.1s ease 0s 2 forwards; }
+
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+  25% {
+    -webkit-transform: translateX(-4px);
+    transform: translateX(-4px); }
+  75% {
+    -webkit-transform: translateX(4px);
+    transform: translateX(4px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
+@keyframes shake {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+  25% {
+    -webkit-transform: translateX(-4px);
+    transform: translateX(-4px); }
+  75% {
+    -webkit-transform: translateX(4px);
+    transform: translateX(4px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
 
 #gameplay #equation {
   -webkit-box-align: center;
@@ -2193,7 +2226,8 @@ input[type=checkbox], input[type=radio] {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    position: relative; }
+    position: relative;
+    width: 33.33%; }
     #gameplay #answers label input {
       position: absolute; }
   #gameplay #answers span {
@@ -2218,6 +2252,23 @@ input[type=checkbox], input[type=radio] {
   #prompt.active {
     display: block; }
   #prompt nav {
+    margin-left: -16px; }
+
+/* _summary.scss */
+#summary {
+  display: none;
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 10; }
+  #summary.active {
+    display: block; }
+  #summary p span {
+    float: right; }
+  #summary nav {
     margin-left: -16px; }
 
 /* _app.scss */
@@ -2251,27 +2302,27 @@ body {
     animation: slide-by 4s linear infinite;
     background: #15141f url("../images/arithmetic-grid.png") center;
     content: '';
-    height: 200vh;
+    height: 200%;
     left: 50%;
     position: absolute;
     top: 50%;
-    -webkit-transform: rotate(15deg) translate(calc(-50% + 44px), calc(-50% + 44px));
-    -ms-transform: rotate(15deg) translate(calc(-50% + 44px), calc(-50% + 44px));
-    transform: rotate(15deg) translate(calc(-50% + 44px), calc(-50% + 44px));
+    -webkit-transform: rotate(15deg) translate(calc(-50% + 44px), calc(-25% + 44px));
+    -ms-transform: rotate(15deg) translate(calc(-50% + 44px), calc(-25% + 44px));
+    transform: rotate(15deg) translate(calc(-50% + 44px), calc(-25% + 44px));
     -webkit-transform-origin: center;
     -ms-transform-origin: center;
     transform-origin: center;
-    width: 200vw; }
+    width: 200%; }
 
 @-webkit-keyframes slide-by {
   to {
-    -webkit-transform: rotate(15deg) translate(calc(-50% - 44px), calc(-50% - 44px));
-    transform: rotate(15deg) translate(calc(-50% - 44px), calc(-50% - 44px)); } }
+    -webkit-transform: rotate(15deg) translate(calc(-50% - 44px), calc(-25% - 44px));
+    transform: rotate(15deg) translate(calc(-50% - 44px), calc(-25% - 44px)); } }
 
 @keyframes slide-by {
   to {
-    -webkit-transform: rotate(15deg) translate(calc(-50% - 44px), calc(-50% - 44px));
-    transform: rotate(15deg) translate(calc(-50% - 44px), calc(-50% - 44px)); } }
+    -webkit-transform: rotate(15deg) translate(calc(-50% - 44px), calc(-25% - 44px));
+    transform: rotate(15deg) translate(calc(-50% - 44px), calc(-25% - 44px)); } }
 
 section {
   display: none;
