@@ -39,7 +39,7 @@
 				<span>Highscores</span>
 			</label>
 		</nav>
-		<div id="keys">X - Select &emsp; Z - Go back</div>
+		<div id="keys"><span class="nes-badge"><span class="is-dark">X</span></span>Select&emsp;<span class="nes-badge"><span class="is-dark">Z</span></span>Go back</div>
 	</section>
 
 	<section id="highscores">
@@ -137,16 +137,17 @@
 
 	<aside id="summary">
 		<div class="nes-container is-rounded is-dark">
-			<p>Questions:<span></span></p>
-			<p>Score:<span></span></p>
+			<p>Answers:<span id="answer-total"></span></p>
+			<p>Score:<span id="score-total"></span></p>
+			<p>&nbsp;</p>
 			<p>Want to play again?</p>
 			<nav>
-				<label for="replay">
-					<input type="radio" class="nes-radio is-dark" id="replay" name="challenge" checked />
+				<label for="replay-challenge">
+					<input type="radio" class="nes-radio is-dark" id="replay-challenge" name="challenge" checked />
 					<span>Yes</span>
 				</label>
-				<label for="end">
-					<input type="radio" class="nes-radio is-dark" id="end" name="challenge" />
+				<label for="end-challenge">
+					<input type="radio" class="nes-radio is-dark" id="end-challenge" name="challenge" />
 					<span>No</span>
 				</label>
 			</nav>
@@ -154,7 +155,7 @@
 	</aside>
 
 	<!-- Main Script -->
-	<script src="js/scripts.js"></script>
+	<script src="js/scripts-min.js"></script>
 	
 </body>
 

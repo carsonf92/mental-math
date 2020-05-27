@@ -2113,6 +2113,15 @@ input[type=checkbox], input[type=radio] {
   #title #keys {
     font-size: 0.75rem;
     margin-top: 1rem; }
+    #title #keys .nes-badge {
+      margin-right: 2.5em;
+      width: 2em;
+      vertical-align: -12px; }
+      #title #keys .nes-badge .is-dark {
+        background-color: white;
+        -webkit-box-shadow: 0 0.5em white, 0 -0.5em white, 0.5em 0 white, -0.5em 0 white;
+        box-shadow: 0 0.5em white, 0 -0.5em white, 0.5em 0 white, -0.5em 0 white;
+        color: #212529; }
 
 /* _highscores.scss */
 #highscores h1 {
