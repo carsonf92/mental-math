@@ -2250,7 +2250,6 @@ input[type=checkbox], input[type=radio] {
 
 /* _prompt.scss */
 #prompt {
-  display: none;
   left: 50%;
   position: fixed;
   top: 50%;
@@ -2258,14 +2257,11 @@ input[type=checkbox], input[type=radio] {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   z-index: 10; }
-  #prompt.active {
-    display: block; }
   #prompt nav {
     margin-left: -16px; }
 
 /* _summary.scss */
 #summary {
-  display: none;
   left: 50%;
   position: fixed;
   top: 50%;
@@ -2273,8 +2269,6 @@ input[type=checkbox], input[type=radio] {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   z-index: 10; }
-  #summary.active {
-    display: block; }
   #summary p span {
     float: right; }
   #summary nav {

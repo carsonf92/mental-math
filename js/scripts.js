@@ -26,6 +26,40 @@ var gameState = {
 	timer: 60
 }
 
+var highscores = {
+	addition: 0,
+	subtraction: 0,
+	multiplication: 0,
+	division: 0
+}
+
+// SAVE HIGHSCORES //
+
+// create session storage if it doesn't already exist
+if (!localStorage.addition) {
+	localStorage.setItem('addition', highscores.addition);
+	localStorage.setItem('subtraction', highscores.subtraction);
+	localStorage.setItem('multiplication', highscores.multiplication);
+	localStorage.setItem('division', highscores.division);
+}
+
+// load session storage if it does exist
+if (localStorage.addition) {
+	updateHighscores();
+}
+
+function updateHighscores() {
+	localStorage.addition = highscores.addition;
+	localStorage.subtraction = highscores.subtraction;
+	localStorage.multiplication = highscores.multiplication;
+	localStorage.division = highscores.division;
+
+	document.getElementById('highscore-addition').innerHTML = localStorage.getItem('addition');
+	document.getElementById('highscore-subtraction').innerHTML = localStorage.getItem('subtraction');
+	document.getElementById('highscore-multiplication').innerHTML = localStorage.getItem('multiplication');
+	document.getElementById('highscore-division').innerHTML = localStorage.getItem('division');
+}
+
 
 // ========================
 // Navigation
@@ -74,7 +108,11 @@ navListener('challenge', function() {
 
 navListener('resign', function() {
 	document.getElementById('prompt').classList.remove('active');
-	endSession();
+	//endSession();
+	if (gameState.mode === 'challenge') {
+		clearInterval(sessionCountdown);
+		gameState.timer = 60;
+	}
 	goToScreen('title');
 	document.addEventListener('keyup', goBack);
 });
@@ -85,13 +123,13 @@ navListener('dismiss', function() {
 });
 
 navListener('replay-challenge', function() {
-	document.getElementById('summary').classList.remove('active');
 	startSession();
+	document.getElementById('summary').classList.remove('active');
 	document.addEventListener('keyup', goBack);
 });
 navListener('end-challenge', function() {
-	document.getElementById('summary').classList.remove('active');
 	goToScreen('title');
+	document.getElementById('summary').classList.remove('active');
 	document.addEventListener('keyup', goBack);
 });
 
@@ -117,7 +155,11 @@ function goToScreen(targetScreen) {
 		document.querySelector('body').classList.add('title');
 	}
 
-	document.querySelector('section.active').classList.remove('active');
+	var activeSections = document.querySelectorAll('section.active');
+	[].forEach.call(activeSections, function(el) {
+	    el.classList.remove('active');
+	});
+
 	document.getElementById(targetScreen).classList.add('active');
 
 	if (targetScreen !== 'highscores' || targetScreen) {
@@ -194,6 +236,11 @@ function countdown() {
 }
 
 function startSession() {
+	gameState.equationCount = 0;
+	gameState.correctCount = 0;
+	gameState.equationArray = [0, 0, 0];	
+	gameState.equationAnswers = [0, 0, 0];	
+	
 	if (gameState.mode === 'challenge') {
 		// start countdown
 		document.querySelector('#info progress').setAttribute('value', 0);
@@ -251,17 +298,45 @@ function wrongAnswer() {
 function endSession() {
 	// if challenge
 	if (gameState.mode === 'challenge') {
+		document.removeEventListener('keyup', goBack);
 		clearInterval(sessionCountdown);
 		gameState.timer = 60;
 
 		// summary data
-		document.getElementById('answer-total').innerHTML = gameState.correctCount + '/' + gameState.equationCount;
-		document.getElementById('score-total').innerHTML = gameState.correctCount - (gameState.equationCount - gameState.correctCount);
+		document.getElementById('answer-total').innerHTML = gameState.correctCount + '/' + (gameState.equationCount - 1);
+		document.getElementById('score-total').innerHTML = gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount);
 
 		// focus on options
-		document.removeEventListener('keyup', goBack);
 		document.getElementById('summary').classList.add('active');
 		document.getElementById('replay-challenge').focus();
+
+		// set highscore
+		switch (gameState.discipline) {
+			case 'addition':
+				if (parseInt(highscores.addition) < gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount)) {
+					highscores.addition = gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount);
+					updateHighscores();
+				}
+				break;
+			case 'subtraction':
+				if (parseInt(highscores.subtraction) < gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount)) {
+					highscores.subtraction = gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount);
+					updateHighscores();
+				}
+				break;
+			case 'multiplication':
+				if (parseInt(highscores.multiplication) < gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount)) {
+					highscores.multiplication = gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount);
+					updateHighscores();
+				}
+				break;
+			case 'division':
+				if (parseInt(highscores.division) < gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount)) {
+					highscores.division = gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount);
+					updateHighscores();
+				}
+				break;
+		}
 	}
 
 	// disable answer buttons
@@ -304,7 +379,7 @@ function generateEquation(discipline) {
 // +
 function additionEquation() {
 	gameState.equationArray[0] = randomIntFromInterval(1, 99);
-	gameState.equationArray[1] = randomIntFromInterval(1, (100 - gameState.equationArray[0]));
+	gameState.equationArray[1] = randomIntFromInterval(0, (100 - gameState.equationArray[0]));
 	gameState.equationArray[2] = gameState.equationArray[0] + gameState.equationArray[1];
 
 	// randomize order of addends
@@ -321,17 +396,53 @@ function additionEquation() {
 
 // -
 function subtractionEquation() {
+	gameState.equationArray[0] = randomIntFromInterval(1, 100);
+	gameState.equationArray[1] = randomIntFromInterval(0, gameState.equationArray[0]);
+	gameState.equationArray[2] = gameState.equationArray[0] - gameState.equationArray[1];
 
+	document.getElementById('operator').innerHTML = '-';
+	document.getElementById('digit-one').innerHTML = gameState.equationArray[0];
+	document.getElementById('digit-two').innerHTML = gameState.equationArray[1];
 }
 
 // x
 function multiplicationEquation() {
+	gameState.equationArray[0] = randomIntFromInterval(1, 10);
+	gameState.equationArray[1] = randomIntFromInterval(1, Math.floor(100 / gameState.equationArray[0]));
+	gameState.equationArray[2] = gameState.equationArray[0] * gameState.equationArray[1];
 
+	// randomize order of factors
+	if (randomIntFromInterval(0, 1)) {
+		var temp = gameState.equationArray[0];
+		gameState.equationArray[0] = gameState.equationArray[1];
+		gameState.equationArray[1] = temp;
+	}
+
+	document.getElementById('operator').innerHTML = '×';
+	document.getElementById('digit-one').innerHTML = gameState.equationArray[0];
+	document.getElementById('digit-two').innerHTML = gameState.equationArray[1];
 }
 
 // /
 function divisionEquation() {
+	var multiplicand = randomIntFromInterval(1, 10);
+	var multiplier = randomIntFromInterval(1, Math.floor(100 / multiplicand));
+	var product = multiplicand * multiplier;
 
+	// randomize order of multiplicand and multiplier
+	if (randomIntFromInterval(0, 1)) {
+		var temp = multiplicand;
+		multiplicand = multiplier;
+		multiplier = temp;
+	}
+
+	gameState.equationArray[0] = product;
+	gameState.equationArray[1] = multiplicand;
+	gameState.equationArray[2] = multiplier;
+
+	document.getElementById('operator').innerHTML = '÷';
+	document.getElementById('digit-one').innerHTML = gameState.equationArray[0];
+	document.getElementById('digit-two').innerHTML = gameState.equationArray[1];
 }
 
 // create random answers and place as options
