@@ -121,8 +121,6 @@ navListener('challenge', function() {
 });
 
 navListener('resign', function() {
-	document.getElementById('prompt').classList.remove('active');
-	//endSession();
 	if (gameState.mode === 'challenge') {
 		clearInterval(sessionCountdown);
 		gameState.timer = 60;
@@ -131,19 +129,17 @@ navListener('resign', function() {
 	document.addEventListener('keyup', goBack);
 });
 navListener('dismiss', function() {
-	document.getElementById('prompt').classList.remove('active');
-	document.querySelector('section.active input:checked').focus();
+	goToScreen('gameplay');
 	document.addEventListener('keyup', goBack);
 });
 
 navListener('replay-challenge', function() {
 	startSession();
-	document.getElementById('summary').classList.remove('active');
+	goToScreen('gameplay');
 	document.addEventListener('keyup', goBack);
 });
 navListener('end-challenge', function() {
 	goToScreen('title');
-	document.getElementById('summary').classList.remove('active');
 	document.addEventListener('keyup', goBack);
 });
 
@@ -198,8 +194,7 @@ function goBack(e) {
 
 		if (activeSection.id === 'gameplay') {
 			document.removeEventListener('keyup', goBack);
-			document.getElementById('prompt').classList.add('active');
-			document.getElementById('resign').focus();
+			goToScreen('prompt');
 		}
 	}
 }
@@ -327,7 +322,8 @@ function endSession() {
 
 		// focus on options
 		document.getElementById('summary').classList.add('active');
-		document.getElementById('replay-challenge').focus();
+		document.querySelector('#summary input:checked').focus();
+		//document.getElementById('replay-challenge').focus();
 
 		// set highscore
 		switch (gameState.discipline) {
