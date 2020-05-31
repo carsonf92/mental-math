@@ -3,6 +3,12 @@
 #title {
 	text-align: center;
 
+	.logo {
+		image-rendering: pixelated;
+		margin-bottom: 2rem;
+		width: 100%;
+	}
+
 	nav {
 		align-items: center;
 		display: flex;
@@ -15,7 +21,7 @@
 
 	#keys {
 		font-size: 0.75rem;
-		margin-top: 1rem;
+		margin-top: 1.5rem;
 
 		.nes-badge {
 			margin-right: 2.5em;
