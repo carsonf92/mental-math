@@ -45,6 +45,11 @@ if (!localStorage.addition) {
 
 // load session storage if it does exist
 if (localStorage.addition) {
+	highscores.addition = localStorage.addition;
+	highscores.subtraction = localStorage.subtraction;
+	highscores.multiplication = localStorage.multiplication;
+	highscores.division = localStorage.division;
+
 	updateHighscores();
 }
 
@@ -54,10 +59,19 @@ function updateHighscores() {
 	localStorage.multiplication = highscores.multiplication;
 	localStorage.division = highscores.division;
 
-	document.getElementById('highscore-addition').innerHTML = localStorage.getItem('addition');
-	document.getElementById('highscore-subtraction').innerHTML = localStorage.getItem('subtraction');
-	document.getElementById('highscore-multiplication').innerHTML = localStorage.getItem('multiplication');
-	document.getElementById('highscore-division').innerHTML = localStorage.getItem('division');
+	document.getElementById('highscore-addition').innerHTML = localStorage.addition;
+	document.getElementById('highscore-subtraction').innerHTML = localStorage.subtraction;
+	document.getElementById('highscore-multiplication').innerHTML = localStorage.multiplication;
+	document.getElementById('highscore-division').innerHTML = localStorage.division;
+}
+
+
+function clickCounter() {
+	if (localStorage.clickcount) {
+		localStorage.clickcount = Number(localStorage.clickcount) + 1;
+	} else {
+		localStorage.clickcount = 1;
+	}
 }
 
 
@@ -162,7 +176,7 @@ function goToScreen(targetScreen) {
 
 	document.getElementById(targetScreen).classList.add('active');
 
-	if (targetScreen !== 'highscores' || targetScreen) {
+	if (targetScreen !== 'highscores') {
 		document.querySelector('section.active input:checked').focus();
 	}
 }
@@ -304,7 +318,12 @@ function endSession() {
 
 		// summary data
 		document.getElementById('answer-total').innerHTML = gameState.correctCount + '/' + (gameState.equationCount - 1);
-		document.getElementById('score-total').innerHTML = gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount);
+
+		if (gameState.correctCount > (gameState.equationCount / 2)) {
+			document.getElementById('score-total').innerHTML = gameState.correctCount - ((gameState.equationCount - 1) - gameState.correctCount);
+		} else {
+			document.getElementById('score-total').innerHTML = '0';
+		}
 
 		// focus on options
 		document.getElementById('summary').classList.add('active');
